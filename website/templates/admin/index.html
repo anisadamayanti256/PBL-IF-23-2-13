@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard FaceRec{% endblock %}
+{% block logout %}<i class="bx bxs-log-out-circle"></i> Logout || {{ username[:15] + '...' if username|length > 15 else username }}{% endblock %}
+{% block content %}
+<main>
+    <h1 class="title">Dashboard</h1>
+    <ul class="breadcrumbs">
+        <li><a href="#">Home</a></li>
+        <li class="divider">/</li>
+        <li><a href="#" class="active">Dashboard</a></li>
+    </ul>
+    <div class="info-data">
+        <div class="card">
+            <div class="head">
+                <div>
+                    <h1 style="font-family: 'Calibri', cursive;">Hi {{ nama }} </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="info-data">
+        <div class="card">
+            <div class="head">
+                <div>
+                    <h2>{{ total_pengguna[0] }}</h2>
+                    <p>Jumlah Pengguna</p>
+                </div>
+                <i class='bx bx-user icon'></i>
+            </div>
+            <span class="progress"></span>
+            <span class="label">No Percentation</span>
+        </div>
+        <div class="card">
+            <div class="head">
+                <div>
+                    <h2>{{ presentasi_kehadiran }}%</h2>
+                    <p>Kehadiran Hari Ini</p>
+                </div>
+                <i class='bx bx-calendar icon'></i>
+            </div>
+            <span class="progress" data-value="{{ presentasi_kehadiran }}%"></span>
+            <a href="/history"><span class="label">Lihat Detail...</span></a>
+        </div>
+        <!--<div class="card">
+            <div class="head">
+                <div>
+                    <h2>60%</h2>
+                    <p>Keakuratan</p>
+                </div>
+                <i class='bx bx-color icon'></i>
+            </div>
+            <span class="progress" data-value="60%"></span>
+            <a href="#"><span class="label">Lihat Detail..</span></a>
+        </div> -->
+
+    </div>
+    <!-- <div class="data">
+        <div class="content-data">
+            <div class="head">
+                <h3>Statistik Kehadiran Hari Ini</h3>
+            </div>
+            <div class="chart">
+                <div id="chart"></div>
+            </div>
+        </div>
+    </div> -->
+    <div class="data">
+        <div class="content-data">
+            <div class="head">
+                <h3>Recent User Baru</h3>
+            </div>
+            <div>
+                <table id="example" class="display"
+                    style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Nama</th>
+                            <th>Username</th>
+                            <th>Tanggal</th>
+                            <!-- Add more headers as needed -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>{% for user in users %}
+                            <td>{{ user[1] }}</td>
+                            <td>{{ user[2] }}</td>
+                            <td>{{ user[5] }}</td>
+                        </tr>{% endfor %}                      
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p>&copy; 2024 Real Time Object & Human Detection by PBL IF 23-2-13 All Rights Reserved.</p>
+        <p>
+            <a href="#">Dashboard</a> |
+            <a href="#">Kehadiran</a> |
+            <a href="#">Webcam</a>
+        </p>
+        <!-- <p>Follow us on:
+            <a href="#" target="_blank" rel="noopener">Facebook</a>
+            |
+            <a href="#" target="_blank" rel="noopener">Twitter</a> |
+            <a href="#" target="_blank" rel="noopener">Instagram</a>
+        </p> -->
+    </div>
+</main>
+{% endblock %}
+{% block java %}
+<script>
+    // APEXCHART
+    var chartLine = {
+      series: [{
+          name: 'Jumlah yang Hadir',
+          data: {{hadir | tojson}}
+      }],
+      chart: {
+          height: 350,
+          type: 'area'
+      },
+      dataLabels: {
+          enabled: true
+      },
+      stroke: {
+          curve: 'smooth'
+      },
+      xaxis: {
+          type: 'datetime',
+          categories: {{waktu | tojson}}
+      },
+      tooltip: {
+          x: {
+              format: 'yyyy/mm/dd HH:mm:ss'
+          },
+      },
+    };
+    var chart = new ApexCharts(document.querySelector("#chart"), chartLine);
+    chart.render();
+</script>
+{% endblock %}

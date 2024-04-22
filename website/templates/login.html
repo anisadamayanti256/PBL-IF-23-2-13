@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='images/logo.png') }}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <title>Login Admin</title>
+</head>
+
+<body>
+    <video autoplay muted loop plays-inline id="myVideo">
+        <source src="{{ url_for('static', filename='images/loginbg.mp4') }}" type="video/mp4">
+    </video>
+
+    <div class="container" id="container">
+        <div class="form-container sign-up">
+            <form id="myForm" action="/signup" method="POST">
+                <h1>Sign Up</h1>
+                <span>Masukkan data pribadi anda.</span>
+                <input type="text" placeholder="Nama" id="nama" name="nama" required oninput="validateForm()">
+                <input type="email" placeholder="Email" id="usrup" name="usrup" required oninput="validateForm()">
+                <input type="password" placeholder="Password 8-20 Karakter, 1 Kapital, 1 Simbol" id="pwdup" name="pwdup" required oninput="validateForm()">
+                <button type="submit" id="signup" name="signup" disabled>Sign Up</button>
+            </form>
+        </div>
+        <div class="form-container sign-in">
+            <form id="myForm" action="/login" method="POST">
+                <h1>Form Login</h1>
+                <!-- <span>Masukkan email dan password anda.</span> -->
+                <input type="email" placeholder="Email" id="usr" name="usr" required oninput="validateForm()">
+                <input type="password" placeholder="Password (8-20 Karakter)" id="pwd" name="pwd" required oninput="validateForm()">
+                
+                {% if error_message %}
+                <div class="error-message">{{ error_message }}</div>
+                {% endif %}
+                
+                <a href="#">Forget Your Password?</a>
+                <button type="submit" id="signin" name="signin" disabled>LogIn</button>
+            </form>
+        </div>
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-left">
+                    <h1>Sudah Ada Akun?</h1>
+                    <p>Masukkan data yang sudah anda daftarkan dengan menekan tombol dibawah ini.</p>
+                    <button class="hidden" id="login">LogIn</button>
+                </div>
+                <div class="toggle-panel toggle-right">
+                    <h1>Tidak Ada Akun?</h1>
+                    <p>Register data anda terlebih dahulu dengan menekan tombol dibawah ini.</p>
+                    <button class="hidden" id="register">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+    <script>
+        function validateForm() {
+            var username = document.getElementById('usr').value;
+            var password = document.getElementById('pwd').value;
+            var usernameUp = document.getElementById('usrup').value;
+            var passwordUp = document.getElementById('pwdup').value;
+            var nama = document.getElementById('nama').value;
+    
+            // Check if both username and password are filled
+            var isFormValid = username.trim() !== '' && password.trim() !== '';
+            var isFormValidUp = usernameUp.trim() !== '' && passwordUp.trim() !== '' && nama.trim() !== '';
+    
+            // Password validation
+            var passwordRegex = /^(?=.*[A-Z])(?=.*[!@#_$%^&*])[a-zA-Z0-9!@#_$%^&*]{8,20}$/;
+    
+            // Enable or disable the submit button based on form validity and password requirements
+            document.getElementById('signin').disabled = !isFormValid;
+            document.getElementById('signup').disabled = !(isFormValidUp && passwordRegex.test(passwordUp));
+        }
+    </script>
+    
+</body>
+
+</html>

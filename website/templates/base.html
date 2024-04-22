@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='images/logo.png') }}" />
+    <link
+      href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css"
+    />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.1/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+
+    <title>{% block title %}FaceRec{% endblock %}</title>
+  </head>
+  <body>
+    <!-- SIDEBAR -->
+    <section id="sidebar">
+      <a href="#" class="brand"
+        ><img
+          src="{{ url_for('static', filename='images/logo.png') }}"
+          alt="img"
+        /><span style="font-size: medium;"> Human Detection</span></a
+      >
+      <ul class="side-menu">
+        <li>{% block dashboard %}
+          <a href="/" class="active"
+            ><i class="bx bxs-dashboard icon"></i> Dashboard</a
+          >
+          {% endblock %}</li>
+        <li class="divider" data-text="main">Data & Kehadiran</li>
+        <li>{% block Kehadiran %}
+          <a href="#"
+            ><i class="bx bxs-user-check icon"></i> Kehadiran
+            <i class="bx bx-chevron-right icon-right"></i
+          ></a>
+          {% endblock %}<ul class="side-dropdown">
+            <!-- <li><a href="/realtime">Real-Time</a></li> -->
+            <li><a href="/history">History & Laporan</a></li>
+          </ul>
+        </li>
+        <li class="divider" data-text="Detection">Camera & Deteksi</li>
+        <li>{% block camdata %}
+          <a href="/camdata"
+            ><i class="bx bxs-camera-plus icon"></i> Ambil Data Photo</a
+          >
+          {% endblock %}</li>
+        <li>{% block webcam %}
+          <a href="/webcam"><i class="bx bxs-webcam icon"></i> Real-Time Webcam</a>
+          {% endblock %}</li>
+      </ul>
+      <!-- <div class="ads">
+        <div class="wrapper">
+          <a href="#" class="btn-upgrade">EDIT</a>
+          <p>
+            More <span>FEATURE !</span> Fitur tambahan ini bisa melakukan
+            <span>EDIT PHOTO</span>
+          </p>
+        </div>
+      </div> -->
+    </section>
+    <!-- SIDEBAR -->
+
+    <!-- NAVBAR -->
+    <section id="content">
+      <!-- NAVBAR -->
+      <nav>
+        <i class="bx bx-menu toggle-sidebar icon"></i>
+        <form action="#">
+          
+        </form>
+
+        <div class="profile">
+          <img
+            src="{{ url_for('static', filename='images/download.jpeg') }}"
+          />
+          <ul class="profile-link">
+            <li>
+              <a href="/logout">{% block logout %}{% endblock %}</a>
+            </li>                  
+          </ul>
+        </div>
+      </nav>
+      <!-- NAVBAR -->
+
+      <!-- MAIN -->
+      {% block content %}{% endblock %}
+      <!-- MAIN -->
+    </section>
+    <!-- NAVBAR -->
+    
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    {% block java %}{% endblock %}
+  </body>
+</html>

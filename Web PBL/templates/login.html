@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="{{ url_for('static', filename='img/logobaru.png') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/login.css') }}"
+    />
+    <title>Login Admin</title>
+  </head>
+  <body>
+    <div class="container" id="container">
+      <div class="form-container sign-in">
+        <form id="myForm" action="/login" method="POST">
+          <img src="static/img/logsig.png" width="160" />
+          <h1>Form Login</h1>
+          <span>Real Time Object & Human Detection for Attendance and Safety Building</span>
+          <input type="text" placeholder="Input Email" id="usr" name="usr" required oninput="validateForm()"/>
+          <input type="password" placeholder="Input Password" id="pwd" name="pwd" required oninput="validateForm()"/>
+
+          {% if error_message %}
+          <div class="error-message">{{ error_message }}</div>
+          {% endif %}
+
+          <button type="submit" id="signin" name="signin" disabled>
+            LogIn
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+    <script>
+      function validateForm() {
+        var username = document.getElementById("usr").value;
+        var password = document.getElementById("pwd").value;
+
+        // Check if both username and password are filled
+        var isFormValid = username.trim() !== "" && password.trim() !== "";
+
+        // Enable or disable the submit button based on form validity
+        document.getElementById("signin").disabled = !isFormValid;
+      }
+    </script>
+  </body>
+</html>

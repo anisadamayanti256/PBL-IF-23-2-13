@@ -1,0 +1,70 @@
+{% extends 'base.html' %} {% block title %}Dashboard FaceRec{% endblock %} {%
+block logout %}<i class="bx bxs-log-out-circle"></i> Logout || {{ username[:15]
++ '...' if username|length > 15 else username }}{% endblock %} {% block
+content%}
+
+<main>
+  <h1 class="title">Dashboard</h1>
+  <ul class="breadcrumbs">
+    <li><a href="#">Home</a></li>
+    <li class="divider">/</li>
+    <li><a href="#" class="active">Dashboard</a></li>
+  </ul>
+  <div class="info-data">
+    <div class="card">
+      <div class="head">
+        <div>
+          <h1 style="font-family: 'Roboto', cursive">Selamat Datang {{ nama }}</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="info-data">
+    <div class="card">
+      <div class="head">
+        <div>
+          <h2>{{ total_pengguna[0] }}</h2>
+          <p>Jumlah Admin</p>
+        </div>
+        <i class="bx bx-user icon"></i>
+      </div>
+      <!-- <span class="progress"></span>
+      <span class="label">No Percentation</span> -->
+    </div>
+  </div>
+  <div class="data">
+    <div class="content-data">
+      <div class="head">
+        <h3>Admin</h3>
+      </div>
+      <div>
+        <table id="example" class="display" style="width: 100%">
+          <thead>
+            <tr>
+              <th>Nama</th>
+              <th>Username</th>
+              <th>Tanggal</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for user in users %}
+            <tr>
+              <td>{{ user[1] }}</td>
+              <td>{{ user[2] }}</td>
+              <td>{{ user[5] }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div class="footer">
+  <p>&copy; 2024 PBL IF-23-2-13. All Rights Reserved.</p>
+</div>
+
+{% endblock %} {% block java %}
+<!-- Include any JavaScript if necessary -->
+{% endblock %}

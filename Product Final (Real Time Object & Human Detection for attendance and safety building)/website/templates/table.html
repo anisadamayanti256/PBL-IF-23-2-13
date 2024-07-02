@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}Attendance Record{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h2 class="headline">Attendance Record</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>ID Number</th>
+        <th>Check in time</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in data %}
+      <tr>
+        <td data-label="Name">{{ row[0] }}</td>
+        <td data-label="Roll No.">{{ row[1] }}</td>
+        <td data-label="Check in time">{{ row[2] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+  }
+  .container {
+    width: 80%;
+    max-width: 800px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+  }
+  .headline {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+  }
+  th, td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  th {
+    background-color: #007bff;
+    color: #fff;
+  }
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  tr:hover {
+    background-color: #f1f1f1;
+  }
+</style>
+{% endblock %}

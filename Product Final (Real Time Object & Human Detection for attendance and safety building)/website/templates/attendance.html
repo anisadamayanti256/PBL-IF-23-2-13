@@ -1,0 +1,32 @@
+{% extends 'base.html' %} {% block title %}Attendance - FaceRec{% endblock %} {%
+block dashboard %}
+<a href="/" class="active"><i class="bx bxs-dashboard icon"></i> Dashboard</a>
+{% endblock %} {% block Kehadiran %}
+<a href="/attendance"><i class="bx bxs-user-check icon"></i> Attendance </a>
+{% endblock %} {% block upload %}
+<a href="/upload"><i class="bx bxs-user-plus icon"></i> Add Employee Data</a>
+{% endblock %} {% block table %}
+<a href="/table"><i class="bx bxs-spreadsheet icon"></i> Attendance Table</a>
+{% endblock %} {% block logout %}
+<i class="bx bxs-log-out-circle"></i> Logout || {{ username[:15] + '...' if
+username|length > 15 else username }} {% endblock %} {% block content %}
+<main>
+  <h1 class="title">Attendance</h1>
+  <ul class="breadcrumbs">
+    <li><a href="#">Home</a></li>
+    <li class="divider">/</li>
+    <li><a href="#" class="active">Attendance</a></li>
+  </ul>
+  <div class="attendance-content">
+    <h1 class="headline">Give Your Attendance Here</h1>
+    <div>
+      <img class="videoFrame" src="{{ url_for('video') }}" width="50%" />
+    </div>
+  </div>
+</main>
+{% endblock %} {% block java %}
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+{% endblock %}

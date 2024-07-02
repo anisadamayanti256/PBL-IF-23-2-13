@@ -1,1 +1,2 @@
 # PBL-IF-23-2-13
+The "Real-Time Object & Human Detection for Attendance and Safety Building" project is a PBL initiative aimed at providing an efficient solution for employee attendance and security monitoring in the surrounding environment. It utilizes cameras installed within the workplace, particularly as requested by the project sponsor, Infinite Learning Batam. This system leverages security camera capable of facial recognition to detect presence and integrates with a web platform.
